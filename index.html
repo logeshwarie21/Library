@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LibraHub | Library Management System</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">📚</div>
+            <div>
+                <h2>LibraHub</h2>
+                <span>Smart Library</span>
+            </div>
+        </div>
+
+        <nav>
+            <a href="#" class="nav-item active">
+                <span>🏠</span>
+                Dashboard
+            </a>
+
+            <a href="#books" class="nav-item">
+                <span>📚</span>
+                Books
+            </a>
+
+            <a href="#transactions" class="nav-item">
+                <span>🔄</span>
+                Transactions
+            </a>
+
+            <a href="#categories" class="nav-item">
+                <span>🏷️</span>
+                Categories
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="help-card">
+                <div class="help-icon">💡</div>
+                <strong>Need Help?</strong>
+                <p>Contact your library staff for assistance.</p>
+            </div>
+        </div>
+
+    </aside>
+
+
+    <!-- Main -->
+    <main class="main">
+
+        <!-- Header -->
+        <header class="header">
+
+            <div>
+                <h1>Library Dashboard</h1>
+                <p>Find your next great book.</p>
+            </div>
+
+            <div class="profile">
+                <div class="notification">🔔</div>
+
+                <div class="avatar">AS</div>
+
+                <div>
+                    <strong>Arun Student</strong>
+                    <small>Student</small>
+                </div>
+            </div>
+
+        </header>
+
+
+        <!-- Stats -->
+        <section class="stats">
+
+            <div class="stat-card">
+                <div class="stat-icon blue">📚</div>
+                <div>
+                    <span>Total Books</span>
+                    <h2 id="totalBooks">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon green">✓</div>
+                <div>
+                    <span>Available</span>
+                    <h2 id="availableBooks">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon orange">📖</div>
+                <div>
+                    <span>Currently Issued</span>
+                    <h2 id="issuedBooks">0</h2>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon purple">🏷️</div>
+                <div>
+                    <span>Categories</span>
+                    <h2 id="categoryCount">0</h2>
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- Search -->
+        <section class="search-section" id="books">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Explore Books</h2>
+                    <p>Search and filter books from the library collection.</p>
+                </div>
+            </div>
+
+            <div class="search-controls">
+
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search by title, author or ISBN..."
+                    >
+                </div>
+
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                </select>
+
+                <select id="availabilityFilter">
+                    <option value="all">All Books</option>
+                    <option value="available">Available</option>
+                    <option value="issued">Issued</option>
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <!-- Books -->
+        <section class="books-section">
+
+            <div class="book-grid" id="bookGrid"></div>
+
+            <div class="empty-state" id="emptyState">
+                <div>📚</div>
+                <h3>No books found</h3>
+                <p>Try changing your search or filters.</p>
+            </div>
+
+        </section>
+
+
+        <!-- Transactions -->
+        <section class="transactions" id="transactions">
+
+            <div class="section-heading">
+                <div>
+                    <h2>Recent Transactions</h2>
+                    <p>Latest book issue and return activity.</p>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Book</th>
+                            <th>Student</th>
+                            <th>Action</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="transactionTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <footer>
+            <p>© 2026 LibraHub · Smart Library Management System</p>
+        </footer>
+
+    </main>
+
+
+    <!-- Book Details Modal -->
+    <div class="modal-overlay" id="bookModal">
+
+        <div class="modal">
+
+            <button class="close-btn" onclick="closeModal()">×</button>
+
+            <div class="modal-cover" id="modalCover">📚</div>
+
+            <div class="modal-content">
+
+                <span class="modal-category" id="modalCategory"></span>
+
+                <h2 id="modalTitle"></h2>
+
+                <p class="author" id="modalAuthor"></p>
+
+                <div class="book-info">
+
+                    <div>
+                        <span>ISBN</span>
+                        <strong id="modalISBN"></strong>
+                    </div>
+
+                    <div>
+                        <span>Published</span>
+                        <strong id="modalYear"></strong>
+                    </div>
+
+                    <div>
+                        <span>Pages</span>
+                        <strong id="modalPages"></strong>
+                    </div>
+
+                    <div>
+                        <span>Status</span>
+                        <strong id="modalStatus"></strong>
+                    </div>
+
+                </div>
+
+                <p class="description" id="modalDescription"></p>
+
+                <button
+                    class="primary-btn modal-action"
+                    id="modalAction"
+                ></button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
